@@ -1,3 +1,7 @@
+# Cloud provider credentials.
+# Use override.tf file to store your secrets.
+# Параметры для подключения к облачному провайдеру.
+# Используй файл override.tf, чтобы случайно не закоммитить их публично.
 provider "yandex" {
   token = "${var.yxtoken}"
   cloud_id = "${var.yxcloudid}"
@@ -5,7 +9,8 @@ provider "yandex" {
   zone = "ru-central1-c"
 }
 
-// Create a new instance
+# Create a new instance
+# Создание новой виртуальной машины
 // https://cloud.yandex.ru/docs/compute/api-ref
 resource "yandex_compute_instance" "tf-0" {
   name = "tf0-centos"
@@ -32,6 +37,8 @@ resource "yandex_compute_instance" "tf-0" {
   }
 
   // ATTENTION!! REMOVE THIS POLICY BEFORE GOING INTO DEV OR PROD ENV
+  # Негарантированные вычислительные ресурсы
+  # Фича яндекса, позволяющая сэкономить баланс на этапе разработки.
   scheduling_policy {
     preemptible = true
   }
